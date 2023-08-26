@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
     {
-        path: '', redirectTo: 'basics', pathMatch: 'full'
+        path: '', redirectTo: 'basics', pathMatch: 'prefix'
     },
     {
         path: 'basics', 
@@ -23,5 +23,9 @@ export const routes: Routes = [
     {
         path: 'entity',
         loadComponent: () => import('./features/ngrx-entity/ngrx-entity.component').then( m => m.NgrxEntityComponent )
+    },
+    {
+        path: 'data',
+        loadComponent: () => import('./features/ngrx-data/ngrx-data.component').then( m => m.NgrxDataComponent )
     }
 ];
