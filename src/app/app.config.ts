@@ -7,14 +7,13 @@ import { provideEffects } from '@ngrx/effects';
 import { provideRouterStore } from '@ngrx/router-store';
 import { HttpClientModule } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { counterReducer } from './features/ngrx-basics/basic-store/basic-store.reducer';
-import { postReducer } from './features/ngrx-store/post-store/post.reducer';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
+import { AppReducer } from './app.state';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
-    provideStore({ firstCounter: counterReducer, postItem: postReducer }),
+    provideStore(AppReducer),
     provideEffects(),
     provideRouterStore(),
     importProvidersFrom(HttpClientModule),

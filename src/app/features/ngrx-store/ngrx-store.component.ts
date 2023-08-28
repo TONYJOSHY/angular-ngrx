@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
 import { Post, PostState } from './post-store/post.state';
@@ -15,7 +15,8 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
   standalone: true,
   imports: [CommonModule, MatTableModule, MatButtonModule, MatInputModule, FormsModule, ReactiveFormsModule ],
   templateUrl: './ngrx-store.component.html',
-  styleUrls: ['./ngrx-store.component.scss']
+  styleUrls: ['./ngrx-store.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class NgrxStoreComponent {
 

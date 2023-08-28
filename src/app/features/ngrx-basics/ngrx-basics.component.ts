@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
 import { Store, StoreModule, provideStore } from '@ngrx/store';
@@ -21,7 +21,8 @@ import { FormsModule } from '@angular/forms';
     // StoreModule.forFeature({ count: counterReducer }) 
   ],
   templateUrl: './ngrx-basics.component.html',
-  styleUrls: ['./ngrx-basics.component.scss']
+  styleUrls: ['./ngrx-basics.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class NgrxBasicsComponent {
 

@@ -2,7 +2,7 @@
 
 <p> Post <b> {{ items$ | async }} </b> </p>
 
-<table mat-table [dataSource]="dataSource$" >
+<table mat-table [dataSource]="dataSource$" class="mb-3">
   
     <!-- Position Column -->
     <ng-container matColumnDef="title">
@@ -36,15 +36,17 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 
+<div class="mb-3"></div>
 <form [formGroup]="postForm" (ngSubmit)="createPost()">
   <div>
     <p> Add title </p>
     <input type="text" mat-input formControlName="title">
   </div>
-  <div>
+  <div class="mb-3">
     <p> Add description </p>
     <input type="text" mat-input formControlName="description">
   </div>
+  <div class="mb-3"></div>
   <button mat-raised-button color="primary" type="submit"> Add Post </button>
 </form>
 
