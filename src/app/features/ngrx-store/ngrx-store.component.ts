@@ -3,20 +3,29 @@ import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
 import { Post, PostState } from './post-store/post.state';
 import { MatTableModule } from '@angular/material/table';
-import { Store } from '@ngrx/store';
+import { Store, provideState } from '@ngrx/store';
 import { getItems, getPost } from './post-store/post.selector';
 import { createPost, deletePost, updatePost } from './post-store/post.actions';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { postReducer } from './post-store/post.reducer';
 
 @Component({
   selector: 'app-ngrx-store',
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatButtonModule, MatInputModule, FormsModule, ReactiveFormsModule ],
+  imports: [ 
+    CommonModule, 
+    MatTableModule, 
+    MatButtonModule, 
+    MatInputModule, 
+    FormsModule, 
+    ReactiveFormsModule,
+    // provideState({ postItem: postReducer })
+  ],
   templateUrl: './ngrx-store.component.html',
   styleUrls: ['./ngrx-store.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class NgrxStoreComponent {
 

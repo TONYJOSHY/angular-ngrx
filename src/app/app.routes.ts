@@ -1,4 +1,6 @@
 import { Routes } from '@angular/router';
+import { provideState } from '@ngrx/store';
+import { postReducer } from './features/ngrx-store/post-store/post.reducer';
 
 export const routes: Routes = [
     {
@@ -10,7 +12,10 @@ export const routes: Routes = [
     },
     {
         path: 'store',
-        loadComponent: () => import('./features/ngrx-store/ngrx-store.component').then( m => m.NgrxStoreComponent )
+        loadComponent: () => import('./features/ngrx-store/ngrx-store.component').then( m => m.NgrxStoreComponent ),
+        // providers: [
+        //     provideState({ postItem: postReducer })
+        // ]
     },
     {
         path: 'effects',

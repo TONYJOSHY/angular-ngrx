@@ -1,1 +1,21 @@
-<p>ngrx-effects works!</p>
+<p>Ngrx Effects -- API call</p>
+
+<p> CB soft dev Credentials </p>
+<p> admin </p>
+<p> 64aphfhu33 </p>
+
+<div>
+    current User - {{ (currentUser$ | async)?.name }}
+</div>
+
+<form (ngSubmit)="onSubmit()" [formGroup]="cbsoftLoginForm">
+    <div>
+        <p> Username </p>
+        <input matInput type="text" formControlName="username">
+    </div>
+    <div>
+        <p> Password </p>
+        <input matInput type="password" formControlName="password">
+    </div>
+    <button mat-raised-button color="primary" type="submit"> Submit </button>
+</form>

@@ -9,12 +9,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { AppReducer } from './app.state';
+import { AuthEffects } from './features/ngrx-effects/effects-store/auth.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideStore(AppReducer),
-    provideEffects(),
+    provideEffects([ AuthEffects ]),
     provideRouterStore(),
     importProvidersFrom(HttpClientModule),
     provideAnimations(),
