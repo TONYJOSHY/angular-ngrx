@@ -5,10 +5,18 @@
 <p> 64aphfhu33 </p>
 
 <div>
-    current User - {{ (currentUser$ | async)?.name }}
+    <p *ngIf="(currentUser$ | async)">  
+        User - {{ (currentUser$ | async)?.name }} 
+        <br>
+        <button mat-raised-button color="warn" (click)="logout()"> Logout </button>
+    </p>
+    <p *ngIf="!(currentUser$ | async)"> 
+        current User - null
+    </p>
 </div>
 
-<form (ngSubmit)="onSubmit()" [formGroup]="cbsoftLoginForm">
+<form (ngSubmit)="onSubmit()" [formGroup]="cbsoftLoginForm" 
+    *ngIf="!(currentUser$ | async)">
     <div>
         <p> Username </p>
         <input matInput type="text" formControlName="username">
@@ -17,5 +25,11 @@
         <p> Password </p>
         <input matInput type="password" formControlName="password">
     </div>
-    <button mat-raised-button color="primary" type="submit"> Submit </button>
+    <button mat-raised-button color="primary" type="submit" class="button-class"> 
+        <mat-spinner color="warn" [diameter]="20" *ngIf="(loading$ | async)"></mat-spinner>
+        <span> Submit </span> 
+    </button>
 </form>
+<div *ngIf="error$ | async">
+    Error Message - {{ error$ | async }}
+</div>

@@ -1,8 +1,9 @@
 import { Injectable } from "@angular/core";
 import { EffectsService } from "../service/effects.service";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { loginStart, loginSuccess } from "./effect.action";
-import { exhaustMap, map } from "rxjs";
+import { loginFail, loginStart, loginSuccess, logoutFail, logoutStart, logoutSuccess } from "./effect.action";
+import { catchError, exhaustMap, map, of, tap } from "rxjs";
+import { Router } from "@angular/router";
 
 @Injectable({
     providedIn: 'root'
@@ -10,6 +11,7 @@ import { exhaustMap, map } from "rxjs";
 export class AuthEffects {
   
     constructor(private actions$: Actions,
+                private router: Router,
                 private effectService: EffectsService) { }
   
 
@@ -18,7 +20,32 @@ export class AuthEffects {
             ofType(loginStart),
             exhaustMap( (action) => {
                return this.effectService.login(action.data).pipe( 
-                    map( (response) => loginSuccess({ user: response.data }) ) 
+                    map( (response) => {
+                        localStorage.setItem('userData', JSON.stringify(response.data))
+                        return loginSuccess({ user: response.data })
+                    } ),
+                    catchError( (err) =>  {
+                        return of( loginFail({ message: 'Login Failed' }) )
+                    } )
+                )
+            } )
+        )
+    } )
+
+    loginRedirect$ = createEffect( () => {
+        return this.actions$.pipe(
+            ofType(loginSuccess),
+            tap( (action) => this.router.navigate(['/operator']) )
+        )
+    }, { dispatch: false } )
+
+    logout$ = createEffect( () => {
+        return this.actions$.pipe(
+            ofType(logoutStart),
+            exhaustMap( () => {
+                return this.effectService.logout().pipe(
+                    map( (response) => logoutSuccess() ),
+                    catchError( (err) => of( logoutFail({ message: 'Logout Failed' }) ) )
                 )
             } )
         )

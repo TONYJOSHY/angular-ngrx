@@ -22,6 +22,10 @@ export const routes: Routes = [
         loadComponent: () => import('./features/ngrx-effects/ngrx-effects.component').then( m => m.NgrxEffectsComponent )
     },
     {
+        path: 'operator',
+        loadComponent: () => import('./features/ngrx-effects/components/operator-list/operator-list.component').then( m => m.OperatorListComponent )
+    },
+    {
         path: 'router',
         loadComponent: () => import('./features/ngrx-router/ngrx-router.component').then( m => m.NgrxRouterComponent )
     },

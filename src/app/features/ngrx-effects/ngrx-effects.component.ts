@@ -6,9 +6,10 @@ import { MatInputModule } from '@angular/material/input';
 import { User, UserLogin } from './service/login.model';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
-import { loginStart } from './effects-store/effect.action';
+import { loginStart, logoutStart } from './effects-store/effect.action';
 import { Observable } from 'rxjs';
-import { getUser } from './effects-store/effect.selector';
+import { getErrorMessage, getLoader, getUser } from './effects-store/effect.selector';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-ngrx-effects',
@@ -19,6 +20,7 @@ import { getUser } from './effects-store/effect.selector';
     ReactiveFormsModule,
     MatButtonModule,
     MatInputModule,
+    MatProgressSpinnerModule
   ],
   templateUrl: './ngrx-effects.component.html',
   styleUrls: ['./ngrx-effects.component.scss']
@@ -30,17 +32,25 @@ export class NgrxEffectsComponent {
     password: ['', Validators.required]
   })
 
-  currentUser$!: Observable<User | null>
+  currentUser$!: Observable<User | null>;
+  loading$!: Observable<boolean>;
+  error$!: Observable<string>
 
   constructor(private fb: FormBuilder,
     private store: Store<AppState>){
-      this.currentUser$ = store.select(getUser)
+      this.currentUser$ = store.select(getUser);
+      this.loading$ = store.select(getLoader);
+      this.error$ = store.select(getErrorMessage);
     }
 
   onSubmit(){
     if(this.cbsoftLoginForm.valid){
       this.store.dispatch(loginStart({ data: this.cbsoftLoginForm.value as UserLogin }))
     }
+  }
+
+  logout(){
+    this.store.dispatch(logoutStart())
   }
 
 }

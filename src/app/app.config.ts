@@ -10,12 +10,13 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { AppReducer } from './app.state';
 import { AuthEffects } from './features/ngrx-effects/effects-store/auth.effects';
+import { OperatorEffects } from './features/ngrx-effects/components/operator-list/operator-store/operator.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideStore(AppReducer),
-    provideEffects([ AuthEffects ]),
+    provideEffects([ AuthEffects, OperatorEffects ]),
     provideRouterStore(),
     importProvidersFrom(HttpClientModule),
     provideAnimations(),
