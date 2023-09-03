@@ -25,6 +25,5 @@ export const authReducer = createReducer(
         return {
             ...state, user: null
         }
-    })
-    
+    }),
 )

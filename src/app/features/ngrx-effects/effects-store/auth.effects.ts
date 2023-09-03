@@ -1,9 +1,10 @@
 import { Injectable } from "@angular/core";
 import { EffectsService } from "../service/effects.service";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { loginFail, loginStart, loginSuccess, logoutFail, logoutStart, logoutSuccess } from "./effect.action";
-import { catchError, exhaustMap, map, of, tap } from "rxjs";
+import { autoLogin, loginFail, loginStart, loginSuccess, logoutFail, logoutStart, logoutSuccess } from "./effect.action";
+import { catchError, exhaustMap, map, mergeMap, of, tap } from "rxjs";
 import { Router } from "@angular/router";
+import { User } from "../service/login.model";
 
 @Injectable({
     providedIn: 'root'
@@ -30,23 +31,43 @@ export class AuthEffects {
                 )
             } )
         )
-    } )
+    } );
 
     loginRedirect$ = createEffect( () => {
         return this.actions$.pipe(
             ofType(loginSuccess),
             tap( (action) => this.router.navigate(['/operator']) )
         )
-    }, { dispatch: false } )
+    }, { dispatch: false } );
 
     logout$ = createEffect( () => {
         return this.actions$.pipe(
             ofType(logoutStart),
             exhaustMap( () => {
                 return this.effectService.logout().pipe(
-                    map( (response) => logoutSuccess() ),
+                    map( (response) => {
+                        localStorage.clear()
+                        return logoutSuccess()
+                    } ),
                     catchError( (err) => of( logoutFail({ message: 'Logout Failed' }) ) )
                 )
+            } )
+        )
+    } );
+
+    logoutRedirect$ = createEffect( () => {
+        return this.actions$.pipe(
+            ofType(logoutSuccess),
+            tap( (action) => this.router.navigate(['/basics']) )
+        )
+    }, { dispatch: false } )
+
+    autoLogin$ = createEffect( () => {
+        return this.actions$.pipe(
+            ofType(autoLogin),
+            map( () => {
+                const user: User | null = JSON.parse(localStorage.getItem('userData') || '')
+                return user ? loginSuccess({ user }) : loginFail({ message: 'Login Failed' })
             } )
         )
     } )

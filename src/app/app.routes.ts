@@ -1,6 +1,10 @@
 import { Routes } from '@angular/router';
 import { provideState } from '@ngrx/store';
 import { postReducer } from './features/ngrx-store/post-store/post.reducer';
+import { provideEffects } from '@ngrx/effects';
+import { OperatorEffects } from './features/ngrx-effects/components/operator-list/operator-store/operator.effects';
+import { operatorReducer } from './features/ngrx-effects/components/operator-list/operator-store/operator.reducer';
+import { appGuard } from '../app/app.guard';
 
 export const routes: Routes = [
     {
@@ -23,11 +27,16 @@ export const routes: Routes = [
     },
     {
         path: 'operator',
-        loadComponent: () => import('./features/ngrx-effects/components/operator-list/operator-list.component').then( m => m.OperatorListComponent )
+        loadComponent: () => import('./features/ngrx-effects/components/operator-list/operator-list.component').then( m => m.OperatorListComponent ),
+        providers: [
+            provideEffects([ OperatorEffects ]),
+            provideState('operatorItem', operatorReducer)
+        ]
     },
     {
         path: 'router',
-        loadComponent: () => import('./features/ngrx-router/ngrx-router.component').then( m => m.NgrxRouterComponent )
+        loadComponent: () => import('./features/ngrx-router/ngrx-router.component').then( m => m.NgrxRouterComponent ),
+        canActivate: [ appGuard ]
     },
     {
         path: 'entity',

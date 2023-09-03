@@ -9,6 +9,9 @@ import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+import { AppState } from './app.state';
+import { Store } from '@ngrx/store';
+import { autoLogin } from './features/ngrx-effects/effects-store/effect.action';
 
 @Component({
   selector: 'app-root',
@@ -25,6 +28,10 @@ import { map, shareReplay } from 'rxjs/operators';
   ]
 })
 export class AppComponent {
+
+  constructor(private store: Store<AppState>){
+    this.store.dispatch(autoLogin())
+  }
 
   private breakpointObserver = inject(BreakpointObserver);
 

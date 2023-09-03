@@ -20,7 +20,7 @@ export class EffectsService {
 
   logout(){
     let url = this.baseurl + 'v3/accounts/logout/';
-    return this.http.get<ResponseType<string>>(url, this.options())
+    return this.http.get<ResponseType<string>>(url)
   }
 
   getOperator(params: any){
@@ -28,24 +28,23 @@ export class EffectsService {
     return this.http.get<ResponseTypeList<Operator[]>>(url, this.optionsWithParams(params))
   }
 
-  options(){
-    const user = JSON.parse(localStorage.getItem('userData') || '')
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'User-Id': user.id,
-        'Bearer': user.token
-      })
-    }
-    return httpOptions;
-  }
+  // options(){
+  //   const user = JSON.parse(localStorage.getItem('userData') || '')
+  //   const httpOptions = {
+  //     headers: new HttpHeaders({
+  //       'User-Id': user.id,
+  //       'Bearer': user.token
+  //     })
+  //   }
+  //   return httpOptions;
+  // }
 
   optionsWithParams(params: any){
-    const user = JSON.parse(localStorage.getItem('userData') || '')
     const httpOptions = {
-      headers: new HttpHeaders({
-        'User-Id': user.id,
-        'Bearer': user.token
-      }),
+      // headers: new HttpHeaders({
+      //   'User-Id': user.id,
+      //   'Bearer': user.token
+      // }),
       params: new HttpParams({ fromObject: params })
     }
     return httpOptions;

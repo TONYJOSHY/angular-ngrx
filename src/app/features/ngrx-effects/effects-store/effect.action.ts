@@ -1,5 +1,7 @@
 import { createAction, props } from "@ngrx/store";
-import { User, UserLogin } from './../service/login.model'
+import { User, UserLogin } from './../service/login.model';
+
+export const autoLogin = createAction('[App component] auto login start')
 
 export const loginStart = createAction('[Ngrx effect Component] login Start', props<{ data: UserLogin }>());
 export const loginSuccess = createAction('[Ngrx effect Component] login Success', props<{user: User}>());

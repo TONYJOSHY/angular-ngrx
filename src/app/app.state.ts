@@ -11,12 +11,12 @@ export interface AppState{
     firstCounter: CounterState;
     postItem: PostState;
     auth: AuthState;
-    operatorItem: OperatorState
+    // operatorItem: OperatorState
 }
 
 export const AppReducer = {
     firstCounter: counterReducer,
     postItem: postReducer,
     auth: authReducer,
-    operatorItem: operatorReducer
+    // operatorItem: operatorReducer
 }
