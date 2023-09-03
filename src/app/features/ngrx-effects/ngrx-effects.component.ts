@@ -5,7 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { User, UserLogin } from './service/login.model';
 import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/app.state';
+import { AppState } from './../../app-config/app.state';
 import { loginStart, logoutStart } from './effects-store/effect.action';
 import { Observable } from 'rxjs';
 import { getErrorMessage, getLoader, getUser } from './effects-store/effect.selector';

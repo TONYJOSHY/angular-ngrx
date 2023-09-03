@@ -4,7 +4,7 @@ import { postReducer } from './features/ngrx-store/post-store/post.reducer';
 import { provideEffects } from '@ngrx/effects';
 import { OperatorEffects } from './features/ngrx-effects/components/operator-list/operator-store/operator.effects';
 import { operatorReducer } from './features/ngrx-effects/components/operator-list/operator-store/operator.reducer';
-import { appGuard } from '../app/app.guard';
+import { appGuard } from './app-config/app.guard';
 
 export const routes: Routes = [
     {
@@ -28,6 +28,7 @@ export const routes: Routes = [
     {
         path: 'operator',
         loadComponent: () => import('./features/ngrx-effects/components/operator-list/operator-list.component').then( m => m.OperatorListComponent ),
+        canActivate: [ appGuard ],
         providers: [
             provideEffects([ OperatorEffects ]),
             provideState('operatorItem', operatorReducer)

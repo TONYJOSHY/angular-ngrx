@@ -8,7 +8,7 @@ import {
 import { Observable, exhaustMap, map, take } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from './app.state';
-import { getUser } from './features/ngrx-effects/effects-store/effect.selector';
+import { getUser } from '../features/ngrx-effects/effects-store/effect.selector';
 
 @Injectable()
 export class AppInterceptor implements HttpInterceptor {

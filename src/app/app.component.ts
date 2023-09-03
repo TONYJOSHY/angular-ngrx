@@ -9,7 +9,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import { AppState } from './app.state';
+import { AppState } from './app-config/app.state';
 import { Store } from '@ngrx/store';
 import { autoLogin } from './features/ngrx-effects/effects-store/effect.action';
 

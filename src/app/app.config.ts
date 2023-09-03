@@ -8,10 +8,10 @@ import { provideRouterStore } from '@ngrx/router-store';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
-import { AppReducer } from './app.state';
+import { AppReducer } from './app-config/app.state';
 import { AuthEffects } from './features/ngrx-effects/effects-store/auth.effects';
 import { OperatorEffects } from './features/ngrx-effects/components/operator-list/operator-store/operator.effects';
-import { AppInterceptor } from './app.interceptor';
+import { AppInterceptor } from './app-config/app.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
