@@ -28,6 +28,11 @@ export class EffectsService {
     return this.http.get<ResponseTypeList<Operator[]>>(url, this.optionsWithParams(params))
   }
 
+  getOperatorById(id: string){
+    let url = this.baseurl + 'v3/accounts/operator/' + id + '/';
+    return this.http.get<ResponseType<Operator>>(url)
+  }
+
   optionsWithParams(params: any){
     const httpOptions = {
       params: new HttpParams({ fromObject: params })

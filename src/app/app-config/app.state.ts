@@ -6,11 +6,13 @@ import { authReducer } from '../features/ngrx-effects/effects-store/effect.reduc
 import { AuthState } from '../features/ngrx-effects/effects-store/effect.state';
 import { OperatorState } from '../features/ngrx-effects/components/operator-list/operator-store/operator.state';
 import { operatorReducer } from '../features/ngrx-effects/components/operator-list/operator-store/operator.reducer';
+import { RouterReducerState, routerReducer } from '@ngrx/router-store';
 
 export interface AppState{
     firstCounter: CounterState;
     postItem: PostState;
     auth: AuthState;
+    routerItem: RouterReducerState
     // operatorItem: OperatorState
 }
 
@@ -18,5 +20,6 @@ export const AppReducer = {
     firstCounter: counterReducer,
     postItem: postReducer,
     auth: authReducer,
+    routerItem: routerReducer
     // operatorItem: operatorReducer
 }

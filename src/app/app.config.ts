@@ -12,13 +12,14 @@ import { AppReducer } from './app-config/app.state';
 import { AuthEffects } from './features/ngrx-effects/effects-store/auth.effects';
 import { OperatorEffects } from './features/ngrx-effects/components/operator-list/operator-store/operator.effects';
 import { AppInterceptor } from './app-config/app.interceptor';
+import { CustomSerializer } from './app-config/app-routerItem.serializer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideStore(AppReducer),
     provideEffects([ AuthEffects ]),
-    provideRouterStore(),
+    provideRouterStore({ serializer: CustomSerializer }),
     importProvidersFrom(HttpClientModule),
     provideAnimations(),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),

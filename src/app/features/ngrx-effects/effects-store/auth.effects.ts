@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { EffectsService } from "../service/effects.service";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { autoLogin, loginFail, loginStart, loginSuccess, logoutFail, logoutStart, logoutSuccess } from "./effect.action";
+import { autoLogin, autoLoginSuccess, loginFail, loginStart, loginSuccess, logoutFail, logoutStart, logoutSuccess } from "./effect.action";
 import { catchError, exhaustMap, map, mergeMap, of, tap } from "rxjs";
 import { Router } from "@angular/router";
 import { User } from "../service/login.model";
@@ -67,7 +67,7 @@ export class AuthEffects {
             ofType(autoLogin),
             map( () => {
                 const user: User | null = JSON.parse(localStorage.getItem('userData') || '')
-                return user ? loginSuccess({ user }) : loginFail({ message: 'Login Failed' })
+                return user ? autoLoginSuccess({ user }) : loginFail({ message: 'Login Failed' })
             } )
         )
     } )

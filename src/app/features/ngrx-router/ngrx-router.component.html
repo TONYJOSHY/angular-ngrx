@@ -1,1 +1,12 @@
-<p>ngrx-router works!</p>
+<p> Ngrx router State </p>
+<p> Operator Details page </p>
+<ng-container *ngIf="(operatorDetails$ | async ) as operator">
+    <div>
+        <p> Id -- {{ operator?.id }} </p>
+        <p> Name -- {{ operator?.firstname }} </p>
+        <p> Approved -- {{ operator?.approved }} </p>
+        <p> Contact Number -- {{ operator.contact_number }} </p>
+        <p> Country -- {{ operator?.country }} </p>
+        <p> Email -- {{ operator?.email }} </p>
+    </div>
+</ng-container>

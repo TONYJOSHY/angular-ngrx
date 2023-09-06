@@ -35,9 +35,13 @@ export const routes: Routes = [
         ]
     },
     {
-        path: 'router',
+        path: 'router/:id',
         loadComponent: () => import('./features/ngrx-router/ngrx-router.component').then( m => m.NgrxRouterComponent ),
-        canActivate: [ appGuard ]
+        canActivate: [ appGuard ],
+        providers: [
+            provideEffects([ OperatorEffects ]),
+            provideState('operatorItem', operatorReducer)
+        ]
     },
     {
         path: 'entity',

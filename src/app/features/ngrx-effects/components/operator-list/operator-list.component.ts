@@ -7,6 +7,7 @@ import { OperatorState } from './operator-store/operator.state';
 import { getOperator, getOperatorError, getOperatorLoader } from './operator-store/operator.selector';
 import { operatorStart } from './operator-store/operator.actions';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-operator-list',
@@ -23,13 +24,18 @@ export class OperatorListComponent implements OnInit {
   loading$!: Observable<boolean>
   error$!: Observable<string>
 
-  constructor(private store: Store<OperatorState>){}
+  constructor(private store: Store<OperatorState>,
+    private router: Router){}
 
   ngOnInit(): void {
     this.store.dispatch(operatorStart({ params: this.params }))
     this.operatorList$ = this.store.select(getOperator)
     this.loading$ = this.store.select(getOperatorLoader);
     this.error$ = this.store.select(getOperatorError)
+  }
+
+  navigation(id: string){
+    this.router.navigate(['/router', id ])
   }
 
 }

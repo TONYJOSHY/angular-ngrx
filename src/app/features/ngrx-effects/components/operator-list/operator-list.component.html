@@ -2,7 +2,7 @@
     <p> Operator Table </p>
     <mat-spinner color="warn" *ngIf="(loading$ | async)"></mat-spinner>
     <div *ngFor="let operator of (operatorList$ | async)">
-        <p> {{ operator.firstname }} </p> 
+        <p (click)="navigation(operator.id)"> {{ operator?.id }} -- {{ operator.firstname }} </p> 
     </div>
     <div *ngIf="(error$ | async) as error">
         Error is -- {{ error }}
