@@ -5,6 +5,8 @@ import { provideEffects } from '@ngrx/effects';
 import { OperatorEffects } from './features/ngrx-effects/components/operator-list/operator-store/operator.effects';
 import { operatorReducer } from './features/ngrx-effects/components/operator-list/operator-store/operator.reducer';
 import { appGuard } from './app-config/app.guard';
+import { EntityOperatorEffects } from './features/ngrx-entity/entity-store/entity-operator.effects'
+import { operatorEntityReducer } from './features/ngrx-entity/entity-store/entity-operator.reducer';
 
 export const routes: Routes = [
     {
@@ -31,7 +33,7 @@ export const routes: Routes = [
         canActivate: [ appGuard ],
         providers: [
             provideEffects([ OperatorEffects ]),
-            provideState('operatorItem', operatorReducer)
+            provideState('operatorEntityItem', operatorEntityReducer)
         ]
     },
     {
@@ -45,7 +47,11 @@ export const routes: Routes = [
     },
     {
         path: 'entity',
-        loadComponent: () => import('./features/ngrx-entity/ngrx-entity.component').then( m => m.NgrxEntityComponent )
+        loadComponent: () => import('./features/ngrx-entity/ngrx-entity.component').then( m => m.NgrxEntityComponent ),
+        providers: [
+            provideEffects([ EntityOperatorEffects ]),
+            provideState('operatorItem', operatorReducer)
+        ]
     },
     {
         path: 'data',
