@@ -53,8 +53,4 @@ export const routes: Routes = [
             provideState('operatorItem', operatorReducer)
         ]
     },
-    {
-        path: 'data',
-        loadComponent: () => import('./features/ngrx-data/ngrx-data.component').then( m => m.NgrxDataComponent )
-    }
 ];
